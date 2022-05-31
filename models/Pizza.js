@@ -18,7 +18,27 @@ const PizzaSchema = new Schema({
         type: String,
         default: 'Large'
     },
-    toppings: []
+    toppings: [],
+    //
+    comments: [
+        {
+            // define type to create relationship to child - Comment
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
+},
+{
+    // tell schema it can use virtuals
+    toJSON: {
+        virtuals: true,
+    },
+    id: false
+});
+
+// get total count of comments and replies on retrieval
+PizzaSchema.virtual('commentCount').get(function() {
+    return this.comments.length;
 });
 
 // create the Pizza model using the PizzaSchema

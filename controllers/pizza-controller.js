@@ -43,6 +43,7 @@ const pizzaController = {
     // update pizza by id
     updatePizza({ params, body }, res) {
         // find single document to update, update it & return it to original doc
+        // "where" clause is used first, then the updated data then the options for how to return
         Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
         .then(dbPizzaData => {
             if (!dbPizzaData) {
