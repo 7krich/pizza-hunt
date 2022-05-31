@@ -5,7 +5,7 @@ const pizzaController = {
     // get all pizzas
     getAllPizza(req, res) {
         Pizza.find({})
-        .then(dbPizzaData => res.json(dbPIzzaData))
+        .then(dbPizzaData => res.json(dbPizzaData))
         .catch(err => {
             cconsole.log(err);
             res.status(400).json(err);
