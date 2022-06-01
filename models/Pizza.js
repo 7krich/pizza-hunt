@@ -1,4 +1,7 @@
 const { Schema, model } = require('mongoose');
+// import dateFormat function from utils
+const dateFormat = require('../utils/dateFormat');
+
 
 // create schema using constructor imported from Mongoose
 const PizzaSchema = new Schema({
@@ -12,7 +15,9 @@ const PizzaSchema = new Schema({
     createdAt: {
         type: Date,
         // if value is provided default to Data.now function & provide timestamp
-        default: Date.now
+        default: Date.now,
+        // getter - each time pizza is retrieved, value is formatted by dateFormat
+        get: (createdAtVal) => dateFormat(createdAtVal)
     },
     size: {
         type: String,
@@ -32,6 +37,7 @@ const PizzaSchema = new Schema({
     // tell schema it can use virtuals
     toJSON: {
         virtuals: true,
+        getters: true
     },
     id: false
 });
