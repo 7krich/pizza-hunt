@@ -68,6 +68,8 @@ const handlePizzaSubmit = event => {
     })
     .catch(err => {
       console.log(err);
+      // if user tries to submit pizza w/o internet connection data stores instead of failing
+      saveRecord(formData);
     });
 };
 
